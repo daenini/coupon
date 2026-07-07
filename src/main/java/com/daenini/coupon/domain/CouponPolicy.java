@@ -21,7 +21,7 @@ public class CouponPolicy {
     private LocalDateTime startAt; // 발급가능 기간 시작
     private LocalDateTime endAt; // 발급 가능 기간 종료
 
-    public CouponPolicy(LocalDateTime endAt, LocalDateTime startAt, int totalQuantity, String name) {
+    public CouponPolicy(String name, int totalQuantity, LocalDateTime startAt, LocalDateTime endAt) {
         this.endAt = endAt;
         this.startAt = startAt;
         this.totalQuantity = totalQuantity;
@@ -29,7 +29,19 @@ public class CouponPolicy {
         this.issuedQuantity = 0;
     }
 
-    protected CouponPolicy() {
+    protected CouponPolicy() {}
+
+    public void issue(LocalDateTime now) {
+        boolean checkQuantity = this.totalQuantity > this.issuedQuantity;
+        boolean checkDate = now.isAfter(this.startAt) && now.isBefore(this.endAt);
+
+        if (!checkDate) {
+            throw new IllegalStateException("기간 검증에 실패했습니다.");
+        } else if (!checkQuantity) {
+            throw new IllegalStateException("쿠폰이 모두 소진되었습니다.");
+        } else {
+            this.issuedQuantity++;
+        }
 
     }
 }
