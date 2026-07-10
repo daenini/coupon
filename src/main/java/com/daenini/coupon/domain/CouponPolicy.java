@@ -32,16 +32,12 @@ public class CouponPolicy {
     protected CouponPolicy() {}
 
     public void issue(LocalDateTime now) {
-        boolean checkQuantity = this.totalQuantity > this.issuedQuantity;
-        boolean checkDate = now.isAfter(this.startAt) && now.isBefore(this.endAt);
-
-        if (!checkDate) {
-            throw new IllegalStateException("기간 검증에 실패했습니다.");
-        } else if (!checkQuantity) {
-            throw new IllegalStateException("쿠폰이 모두 소진되었습니다.");
-        } else {
-            this.issuedQuantity++;
+        if (now.isBefore(this.startAt) || !now.isBefore(this.endAt)) {
+            throw new IllegalStateException("발급 가능 기간이 아닙니다.");
         }
-
+        if (this.issuedQuantity >= this.totalQuantity) {
+            throw new IllegalStateException("쿠폰이 모두 소진되었습니다.");
+        }
+        this.issuedQuantity++;
     }
 }
