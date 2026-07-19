@@ -1,0 +1,10 @@
+POST http://localhost:8080/api/coupon-policies/1/issues
+Content-Type: application/json
+
+{"userId": "user1"}
+
+### 소진 테스트
+POST http://localhost:8080/api/coupon-policies/2/issues
+Content-Type: application/json
+
+{"userId": "user2"}
