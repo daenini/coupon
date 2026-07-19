@@ -87,7 +87,6 @@ class CouponPolicyTest {
         // then
         assertThat(policy.getIssuedQuantity()).isEqualTo(1);
 
-
     }
 
 
