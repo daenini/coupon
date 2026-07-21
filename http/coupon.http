@@ -8,3 +8,9 @@ POST http://localhost:8080/api/coupon-policies/2/issues
 Content-Type: application/json
 
 {"userId": "user2"}
+
+### 쿠폰 등록 테스트
+POST http://localhost:8080/api/coupon-policies
+Content-Type: application/json
+
+{"name": "여름 할인 쿠폰", "totalQuantity": 50, "startAt": "2026-07-22T00:00:00", "endAt": "2026-08-31T23:59:59"}
