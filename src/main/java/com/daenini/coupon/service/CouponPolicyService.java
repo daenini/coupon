@@ -2,6 +2,7 @@ package com.daenini.coupon.service;
 
 import com.daenini.coupon.domain.CouponPolicy;
 import com.daenini.coupon.dto.CouponPolicyRequest;
+import com.daenini.coupon.dto.CouponPolicyResponse;
 import com.daenini.coupon.repository.CouponPolicyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,18 @@ public class CouponPolicyService {
         CouponPolicy savedPolicy = couponPolicyRepository.save(policy);
 
         return savedPolicy.getId();
+    }
+
+    @Transactional(readOnly = true)
+    public CouponPolicyResponse getPolicy(Long id) {
+
+        CouponPolicy policy = couponPolicyRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("CouponPolicy not found"));
+
+        CouponPolicyResponse response = new CouponPolicyResponse(policy.getId(), policy.getName(), policy.getTotalQuantity(), policy.getIssuedQuantity(),  policy.getStartAt(), policy.getEndAt());
+
+        return response;
+
     }
 
 }

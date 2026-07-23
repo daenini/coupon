@@ -14,3 +14,16 @@ POST http://localhost:8080/api/coupon-policies
 Content-Type: application/json
 
 {"name": "여름 할인 쿠폰", "totalQuantity": 50, "startAt": "2026-07-22T00:00:00", "endAt": "2026-08-31T23:59:59"}
+
+
+### 정책 조회
+GET http://localhost:8080/api/coupon-policies/3
+
+{
+  "id": 3,
+  "name": "여름 할인 쿠폰",
+  "totalQuantity": 50,
+  "issuedQuantity": 0,
+  "startAt": "2026-07-22T00:00:00",
+  "endAt": "2026-08-31T23:59:59"
+}
